@@ -16,8 +16,11 @@ export type Product = {
   accent: string; // hex used for the illustration glow
   status: "Live" | "New" | "Beta" | "Soon";
   category: string;
+  /** Product detail page, share card and structured data image. */
   image?: string;
-  /** Label of the button that opens the product; defaults to "Access Tool". */
+  /** Card image on /products and the home page: the live site in a browser and a phone (1200x900). Falls back to `image`. */
+  cardImage?: string;
+  /** Label of the button that opens the product; defaults to "Open tool". */
   cta?: string;
 };
 
@@ -45,6 +48,7 @@ export const products: Product[] = [
     status: "Live",
     category: "Media",
     image: "/images/downloader.png",
+    cardImage: "/images/products/downloader.jpg",
   },
   {
     slug: "linkinbio",
@@ -66,6 +70,7 @@ export const products: Product[] = [
     status: "Live",
     category: "Creator",
     image: "/images/linkinbio.png",
+    cardImage: "/images/products/linkinbio.jpg",
   },
   {
     slug: "models",
@@ -87,6 +92,7 @@ export const products: Product[] = [
     status: "Live",
     category: "3D",
     image: "/images/models.png",
+    cardImage: "/images/products/models.jpg",
   },
   {
     slug: "videotogif",
@@ -108,6 +114,7 @@ export const products: Product[] = [
     status: "Live",
     category: "Media",
     image: "/images/videotogif.png",
+    cardImage: "/images/products/videotogif.jpg",
   },
   {
     slug: "videotoimages",
@@ -129,6 +136,7 @@ export const products: Product[] = [
     status: "Live",
     category: "Media",
     image: "/images/videotoimages.png",
+    cardImage: "/images/products/videotoimages.jpg",
   },
   {
     slug: "games",
@@ -150,6 +158,7 @@ export const products: Product[] = [
     status: "New",
     category: "Games",
     image: "/images/games.jpg",
+    cardImage: "/images/products/games.jpg",
     cta: "Play Games",
   },
   {
@@ -172,6 +181,7 @@ export const products: Product[] = [
     status: "New",
     category: "Media",
     image: "/images/videocut.png",
+    cardImage: "/images/products/videocut.jpg",
     cta: "Open Video Cut",
   },
   {
@@ -194,6 +204,7 @@ export const products: Product[] = [
     status: "New",
     category: "Creator",
     image: "/images/videomaker.png",
+    cardImage: "/images/products/videomaker.jpg",
     cta: "Make a Video",
   },
   {
@@ -216,6 +227,7 @@ export const products: Product[] = [
     status: "New",
     category: "Creator",
     image: "/images/utubeflow.png",
+    cardImage: "/images/products/utubeflow.jpg",
   },
   {
     slug: "javaplay",
@@ -237,6 +249,7 @@ export const products: Product[] = [
     status: "New",
     category: "Games",
     image: "/images/javaplay.png",
+    cardImage: "/images/products/javaplay.jpg",
     cta: "Play Java Games",
   },
 ];
@@ -1234,42 +1247,7 @@ export const docs: Doc[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Testimonials                                                       */
-/* ------------------------------------------------------------------ */
-export type Testimonial = { name: string; role: string; text: string; initials: string; hue: string };
-export const testimonials: Testimonial[] = [
-  {
-    name: "Ananya Sharma",
-    role: "Content Creator",
-    text: "CodeLove replaced five different sites I used to juggle. The downloader and video tools alone save me hours every single week.",
-    initials: "AS",
-    hue: "from-blue-500 to-indigo-600",
-  },
-  {
-    name: "Daniel Okafor",
-    role: "Video Editor",
-    text: "Being able to compress and convert video in the browser with no watermark and no upload is a game changer for quick client turnarounds.",
-    initials: "DO",
-    hue: "from-rose-500 to-pink-600",
-  },
-  {
-    name: "Sofia Marchetti",
-    role: "UX Designer",
-    text: "The articles are actually well-written and useful, not filler. I send the format and design guides to my junior designers all the time.",
-    initials: "SM",
-    hue: "from-amber-500 to-orange-600",
-  },
-  {
-    name: "Rahul Verma",
-    role: "Student",
-    text: "As a student, having powerful tools that are free and don't nag me to sign up is amazing. The web development guide got me my first internship.",
-    initials: "RV",
-    hue: "from-cyan-500 to-blue-600",
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/*  Navigation                                                         */
+/*  Navigation                                                        */
 /* ------------------------------------------------------------------ */
 export const navLinks = [
   { label: "Products", href: "/products" },
@@ -1536,24 +1514,6 @@ export const footerColumns = [
       { label: "UTubeFlow", href: "/products/utubeflow" },
       { label: "JavaPlay", href: "/products/javaplay" },
       { label: "All Products", href: "/products" },
-    ],
-  },
-  {
-    // Plain links to every site in the CodeLove network so crawlers can discover each subdomain.
-    title: "CodeLove network",
-    links: [
-      { label: "CodeLove Home", href: "https://codelove.in" },
-      { label: "Gowtham Portfolio", href: "https://gowtham.codelove.in" },
-      { label: "Free 3D Models", href: "https://models.codelove.in" },
-      { label: "Free 3D Games", href: "https://games.codelove.in" },
-      { label: "Insta Downloader", href: "https://downloader.codelove.in" },
-      { label: "Link in Bio", href: "https://linkinbio.codelove.in" },
-      { label: "Video to GIF", href: "https://videotogif.codelove.in" },
-      { label: "Video to Images", href: "https://videotoimages.codelove.in" },
-      { label: "Video Cut", href: "https://videocut.codelove.in" },
-      { label: "Free AI Video Maker", href: "https://videomaker.codelove.in" },
-      { label: "Free YouTube Automation", href: "https://utubeflow.codelove.in" },
-      { label: "Free Java Games", href: "https://javaplay.codelove.in" },
     ],
   },
   {

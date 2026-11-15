@@ -15,7 +15,7 @@ export default function ProductCard({ product, featured = false }: { product: Pr
 
   return (
     <article
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--bg-elevated)] shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)] ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--bg-elevated)] shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)] ${
         featured ? "lg:col-span-2 lg:flex-row" : ""
       }`}
     >
@@ -25,8 +25,8 @@ export default function ProductCard({ product, featured = false }: { product: Pr
       >
         {/* 4:3 keeps the whole illustration in view — a shorter strip cropped the square artwork to its middle. */}
         <div className={`relative flex aspect-[4/3] items-center justify-center bg-gradient-to-br ${product.gradient} ${featured ? "lg:aspect-auto lg:h-full lg:min-h-[19rem]" : ""}`}>
-          {product.image ? (
-            <img src={product.image} alt={product.name} width={800} height={600} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+          {(product.cardImage ?? product.image) ? (
+            <img src={product.cardImage ?? product.image} alt={product.name} width={800} height={600} className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
           ) : (
             <>
               {/* decorative orbs */}
@@ -67,7 +67,8 @@ export default function ProductCard({ product, featured = false }: { product: Pr
           </span>
         </div>
 
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-[var(--text-muted)]">{product.description}</p>
+        {/* Always three lines tall, so the feature lists and buttons line up across a row of cards. */}
+        <p className="mt-3 line-clamp-3 min-h-[calc(3*1.625*0.875rem)] text-sm leading-relaxed text-[var(--text-muted)]">{product.description}</p>
 
         <ul className={`mt-4 grid gap-2 ${featured ? "sm:grid-cols-2" : ""}`}>
           {product.features.map((f) => (
@@ -78,13 +79,14 @@ export default function ProductCard({ product, featured = false }: { product: Pr
           ))}
         </ul>
 
-        <div className="mt-6 flex flex-wrap items-center gap-2.5">
+        {/* mt-auto pins the buttons to the bottom of every card; two equal columns keep them on one line. */}
+        <div className="mt-auto grid grid-cols-2 gap-2.5 pt-6">
           <Link
             href={`/products/${product.slug}`}
             aria-label={`Explore ${product.name} features and guide`}
-            className="group/btn inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold transition hover:border-transparent hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white"
+            className="group/btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] px-3 py-2.5 text-sm font-semibold transition hover:border-transparent hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white"
           >
-            About {product.name}
+            Learn more
             <Icon name="arrowRight" size={16} className="transition group-hover/btn:translate-x-0.5" />
           </Link>
           {isLive ? (
@@ -92,13 +94,14 @@ export default function ProductCard({ product, featured = false }: { product: Pr
               href={product.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/tool inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--text-muted)] transition hover:text-primary"
+              aria-label={`${product.cta ?? "Open"} ${product.name} (opens ${product.domain})`}
+              className="group/tool inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--text-muted)] transition hover:text-primary"
             >
-              {product.cta ?? "Access Tool"}
+              {product.cta ?? "Open tool"}
               <Icon name="arrowUpRight" size={16} className="transition group-hover/tool:translate-x-0.5 group-hover/tool:-translate-y-0.5" />
             </a>
           ) : (
-            <span className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--text-faint)]">
+            <span className="inline-flex cursor-not-allowed items-center justify-center gap-2 whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--text-faint)]">
               <Icon name="clock" size={16} />
               Coming soon
             </span>

@@ -6,7 +6,7 @@ import WhyChoose from "@/components/WhyChoose";
 import LearningCenter from "@/components/LearningCenter";
 import Articles from "@/components/Articles";
 import Documentation from "@/components/Documentation";
-import Testimonials from "@/components/Testimonials";
+import MadeBy from "@/components/MadeBy";
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import { SITE_URL } from "@/lib/seo";
@@ -27,7 +27,7 @@ export default function Home() {
         <LearningCenter />
         <Articles />
         <Documentation />
-        <Testimonials />
+        <MadeBy />
       </main>
       <Footer />
     </>

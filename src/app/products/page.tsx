@@ -67,9 +67,10 @@ export default function ProductsPage() {
         {/* Grid */}
         <section className="container-px mx-auto max-w-7xl pb-[50px] pt-6 sm:pb-[50px]">
           <h2 className="sr-only">All CodeLove Products and Free Web Tools</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {/* A lone card on the last row of three sits in the middle column instead of the left. */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:[&>*:last-child:nth-child(3n+1)]:col-start-2">
             {products.map((product, i) => (
-              <Reveal key={product.slug} delay={(i % 3) * 70}>
+              <Reveal key={product.slug} delay={(i % 3) * 70} className="h-full">
                 <ProductCard product={product} />
               </Reveal>
             ))}
