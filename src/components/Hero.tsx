@@ -1,4 +1,5 @@
 import Icon from "./Icon";
+import ProductLogo from "./ProductLogo";
 import Reveal from "./Reveal";
 import { products } from "@/lib/data";
 
@@ -32,9 +33,7 @@ export default function Hero() {
           <Reveal key={p.slug} className={`absolute ${className}`} delay={400 + i * 200}>
             <div className={anim} style={{ animationDelay: delay }}>
               <div className="surface flex w-52 items-center gap-3 rounded-2xl p-3 shadow-[var(--shadow-soft)]">
-                <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${p.gradient} text-white`}>
-                  <Icon name={p.icon} size={20} />
-                </span>
+                <ProductLogo product={p} size={40} />
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold">{p.name}</span>
                   <span className="block truncate text-xs text-[var(--text-faint)]">{p.tagline}</span>

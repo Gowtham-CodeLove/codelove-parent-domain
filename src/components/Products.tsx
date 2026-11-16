@@ -3,6 +3,7 @@ import SectionHeading from "./SectionHeading";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
 import Icon from "./Icon";
+import ProductLogo from "./ProductLogo";
 import { products } from "@/lib/data";
 
 export default function Products() {
@@ -47,7 +48,7 @@ export default function Products() {
                 href={product.url}
                 className="inline-flex items-center gap-2 rounded-full border border-[var(--surface-border)] px-4 py-2 text-sm text-[var(--text-muted)] transition hover:border-primary hover:text-[var(--text)]"
               >
-                <Icon name={product.icon} size={14} />
+                <ProductLogo product={product} size={18} className="!shadow-none" />
                 <span className="font-medium text-[var(--text)]">{product.name}</span>
                 <span>{product.domain}</span>
               </a>

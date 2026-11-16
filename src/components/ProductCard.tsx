@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Icon from "./Icon";
+import ProductLogo from "./ProductLogo";
 import { isProductLive, type Product } from "@/lib/data";
 
 export default function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
@@ -56,11 +57,14 @@ export default function ProductCard({ product, featured = false }: { product: Pr
       {/* Body */}
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between gap-3">
-          <div>
-            <h3 className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight">
-              {product.name}
-            </h3>
-            <p className="mt-0.5 text-xs font-medium text-[var(--text-faint)]">{product.domain}</p>
+          <div className="flex min-w-0 items-center gap-3">
+            <ProductLogo product={product} size={40} />
+            <div className="min-w-0">
+              <h3 className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight">
+                {product.name}
+              </h3>
+              <p className="mt-0.5 truncate text-xs font-medium text-[var(--text-faint)]">{product.domain}</p>
+            </div>
           </div>
           <span className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium ring-1 ring-inset ${statusStyles}`}>
             {product.category}

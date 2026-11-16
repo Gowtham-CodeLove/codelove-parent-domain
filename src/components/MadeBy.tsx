@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
 import Icon from "./Icon";
+import ProductLogo from "./ProductLogo";
 import { ContactLinks } from "./ContactLinks";
 import { products } from "@/lib/data";
 
@@ -80,10 +81,9 @@ export default function MadeBy() {
                         href={`/products/${product.slug}`}
                         className="group flex h-full items-center gap-3 rounded-2xl border border-[var(--surface-border)] bg-[var(--surface)] p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-glow)] sm:flex-col sm:gap-2.5 sm:p-4 sm:text-center"
                       >
-                        <span
-                          className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${product.gradient} text-white shadow-lg transition-transform duration-300 group-hover:scale-110 sm:h-14 sm:w-14 sm:rounded-2xl`}
-                        >
-                          <Icon name={product.icon} size={22} />
+                        <span className="shrink-0 transition-transform duration-300 group-hover:scale-110">
+                          <ProductLogo product={product} size={40} className="shadow-lg sm:hidden" />
+                          <ProductLogo product={product} size={56} className="hidden shadow-lg sm:block" />
                         </span>
                         <span className="text-xs font-semibold leading-tight sm:text-[13px]">{product.name}</span>
                       </Link>

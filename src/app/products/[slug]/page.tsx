@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import Icon from "@/components/Icon";
+import ProductLogo from "@/components/ProductLogo";
 import { products, getProduct, isProductLive } from "@/lib/data";
 import { productJsonLd } from "@/lib/seo";
 
@@ -217,7 +218,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     {/* window body */}
                     <div className={`relative grid w-full place-items-center bg-gradient-to-br ${product.gradient} ${product.image ? 'p-0' : 'p-10 sm:p-14'}`}>
                       {product.image ? (
-                        <img src={product.image} alt={product.name} className="aspect-square w-full object-cover sm:aspect-[4/3]" />
+                        <img src={product.image} alt={`${product.name} at ${product.domain}`} width={1280} height={800} fetchPriority="high" className="aspect-[16/10] w-full object-cover object-top" />
                       ) : (
                         <>
                           <div aria-hidden className="absolute inset-0">
@@ -249,6 +250,57 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
         </section>
+
+        {/* ============================================================ */}
+        {/*  INSIDE THE PRODUCT — real screenshots of the live site      */}
+        {/* ============================================================ */}
+        {product.screens.length > 1 && (
+          <section className="py-[50px]">
+            <div className="container-px mx-auto max-w-6xl">
+              <Reveal className="mx-auto max-w-2xl text-center">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[var(--surface-border)] bg-[var(--surface)] px-3.5 py-1.5 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">
+                  <ProductLogo product={product} size={16} className="!shadow-none !ring-0" />
+                  Real screenshots
+                </span>
+                <h2 className="mt-5 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight sm:text-4xl">
+                  Inside <span className="text-gradient">{product.name}</span>
+                </h2>
+                <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)]">
+                  This is what you get at {product.domain} — on a computer and on your phone.
+                </p>
+              </Reveal>
+
+              <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_15rem] lg:items-start">
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {product.screens.slice(1).map((shot, i) => (
+                    <Reveal key={shot.src} delay={i * 90}>
+                      <figure className="group overflow-hidden rounded-2xl border border-[var(--surface-border)] bg-[var(--bg-elevated)] shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-glow)]">
+                        <div className="flex items-center gap-1.5 border-b border-[var(--surface-border)] bg-[var(--surface)] px-3 py-2">
+                          <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
+                          <span className="ml-2 truncate text-[10px] text-[var(--text-faint)]">{product.domain}</span>
+                        </div>
+                        <a href={shot.src} target="_blank" rel="noopener" aria-label={`Open the screenshot: ${shot.caption}`}>
+                          <img src={shot.src} alt={shot.caption} width={1280} height={800} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover object-top" />
+                        </a>
+                        <figcaption className="px-4 py-3 text-sm leading-snug text-[var(--text-muted)]">{shot.caption}</figcaption>
+                      </figure>
+                    </Reveal>
+                  ))}
+                </div>
+                <Reveal delay={200} className="mx-auto w-full max-w-[15rem]">
+                  <figure>
+                    <div className="overflow-hidden rounded-[2.2rem] border-[7px] border-slate-900 bg-slate-900 shadow-[var(--shadow-glow)] ring-1 ring-[var(--surface-border)]">
+                      <img src={product.phone} alt={`${product.name} on a phone`} width={520} height={1126} loading="lazy" decoding="async" className="aspect-[390/844] w-full rounded-[1.7rem] object-cover object-top" />
+                    </div>
+                    <figcaption className="mt-3 text-center text-sm text-[var(--text-muted)]">Works on your phone too</figcaption>
+                  </figure>
+                </Reveal>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ============================================================ */}
         {/*  HOW IT WORKS — timeline                                    */}
@@ -398,9 +450,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.25),transparent_60%)]" />
               </div>
               <div className="relative">
-                <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl border border-white/30 bg-white/15 backdrop-blur-md">
-                  <Icon name={product.icon} size={32} className="text-white" />
-                </div>
+                <ProductLogo product={product} size={72} className="mx-auto !ring-2 !ring-white/40 shadow-xl" />
                 <h2 className="mt-6 font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   {isLive ? `Ready to try ${product.name}?` : `${product.name} is launching soon`}
                 </h2>
@@ -447,9 +497,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                     href={`/products/${p.slug}`}
                     className="group flex h-full flex-col rounded-2xl border border-[var(--surface-border)] bg-[var(--bg-elevated)] p-6 shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[var(--shadow-glow)]"
                   >
-                    <span className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${p.gradient} text-white shadow-sm transition-transform duration-500 group-hover:scale-110`}>
-                      <Icon name={p.icon} size={24} />
-                    </span>
+                    <ProductLogo product={p} size={48} className="transition-transform duration-500 group-hover:scale-110" />
                     <h3 className="mt-5 font-[family-name:var(--font-display)] text-lg font-bold tracking-tight">
                       {p.name}
                     </h3>

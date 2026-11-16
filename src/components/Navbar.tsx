@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { flushSync } from "react-dom";
 import Link from "next/link";
 import Icon from "./Icon";
+import ProductLogo from "./ProductLogo";
 import Logo from "./Logo";
 import { navLinks, products, articles } from "@/lib/data";
 
@@ -129,9 +130,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
               onClick={onClose}
               className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition hover:bg-[var(--surface)]"
             >
-              <span className={`grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br ${p.gradient} text-white`}>
-                <Icon name={p.icon} size={18} />
-              </span>
+              <ProductLogo product={p} size={36} />
               <span className="min-w-0">
                 <span className="block truncate text-sm font-medium">{p.name}</span>
                 <span className="block truncate text-xs text-[var(--text-faint)]">{p.domain}</span>

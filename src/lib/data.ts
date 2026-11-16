@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/Icon";
+import { newArticles, newBlogs } from "./articles-new";
 
 /* ------------------------------------------------------------------ */
 /*  Products                                                           */
@@ -22,7 +23,19 @@ export type Product = {
   cardImage?: string;
   /** Label of the button that opens the product; defaults to "Open tool". */
   cta?: string;
+  /** The product's own logo, the same icon its site uses (public/logos). */
+  logo: string;
+  /** Real screenshots of the live site for the product page: desktop screens with a caption, and the phone view. */
+  screens: { src: string; caption: string }[];
+  phone: string;
 };
+
+/** Real screenshots live in public/images/screens/<slug>-1..3.jpg and <slug>-phone.jpg. */
+const shots = (slug: string, captions: [string, string, string]) => ({
+  image: `/images/screens/${slug}-1.jpg`,
+  screens: captions.map((caption, i) => ({ src: `/images/screens/${slug}-${i + 1}.jpg`, caption })),
+  phone: `/images/screens/${slug}-phone.jpg`,
+});
 
 /** Every status except "Soon" is already live and can be opened. */
 export const isProductLive = (product: Product) => product.status !== "Soon";
@@ -47,7 +60,8 @@ export const products: Product[] = [
     accent: "#3b82f6",
     status: "Live",
     category: "Media",
-    image: "/images/downloader.png",
+    logo: "/logos/downloader.svg",
+    ...shots("downloader", ["Paste a public Reel, video or photo link and download it in HD","The Instagram video downloader, with single and multi-link modes","Pinterest video downloader — the same paste-and-save flow"]),
     cardImage: "/images/products/downloader.jpg",
   },
   {
@@ -69,7 +83,8 @@ export const products: Product[] = [
     accent: "#a855f7",
     status: "Live",
     category: "Creator",
-    image: "/images/linkinbio.png",
+    logo: "/logos/linkinbio.png",
+    ...shots("linkinbio", ["Build one free page for every link you share","Icons for every network, ready for any kind of creator","Pages for creators, freelancers, musicians and small shops"]),
     cardImage: "/images/products/linkinbio.jpg",
   },
   {
@@ -91,7 +106,8 @@ export const products: Product[] = [
     accent: "#6366f1",
     status: "Live",
     category: "3D",
-    image: "/images/models.png",
+    logo: "/logos/models.svg",
+    ...shots("models", ["6,700+ free 3D models with a live preview on the home page","Browse by category — here, free vehicle models","The full catalogue: filter by category and download GLB files"]),
     cardImage: "/images/products/models.jpg",
   },
   {
@@ -113,7 +129,8 @@ export const products: Product[] = [
     accent: "#f43f5e",
     status: "Live",
     category: "Media",
-    image: "/images/videotogif.png",
+    logo: "/logos/videotogif.svg",
+    ...shots("videotogif", ["Convert and edit GIFs and videos right in your browser","The Video to GIF tool: drop a clip, trim it and set the size","Every GIF and video tool in one place"]),
     cardImage: "/images/products/videotogif.jpg",
   },
   {
@@ -135,7 +152,8 @@ export const products: Product[] = [
     accent: "#d946ef",
     status: "Live",
     category: "Media",
-    image: "/images/videotoimages.png",
+    logo: "/logos/videotoimages.svg",
+    ...shots("videotoimages", ["Process videos and images privately, in your browser","Video to Frame: turn any clip into crisp JPG, PNG or WebP frames","The full media toolkit: frames, MP3, compress, crop and resize"]),
     cardImage: "/images/products/videotoimages.jpg",
   },
   {
@@ -148,7 +166,7 @@ export const products: Product[] = [
     description:
       "Play free 3D games right in your browser — kart racing, skating, tower defense, a dungeon crawler, mini golf, puzzles and more. No download, no sign-up.",
     features: [
-      "Free 3D games, no download",
+      "14 free 3D games, no download",
       "Racing, action, puzzle & strategy",
       "Plays on PC and phone",
       "No sign-up needed",
@@ -157,7 +175,8 @@ export const products: Product[] = [
     accent: "#f59e0b",
     status: "New",
     category: "Games",
-    image: "/images/games.jpg",
+    logo: "/logos/games.svg",
+    ...shots("games", ["Free 3D games that run in your browser — just press play","Every game has its own page: Night Heist, a stealth game","The full game list, from racing to tower defense"]),
     cardImage: "/images/products/games.jpg",
     cta: "Play Games",
   },
@@ -171,16 +190,17 @@ export const products: Product[] = [
     url: "https://videocut.codelove.in",
     icon: "scissors",
     features: [
-      "Cut videos into 9:16 Shorts & Reels in-browser",
-      "Frame-accurate trimming & multi-clip splitting",
-      "Zero server uploads — runs privately on your device",
-      "No watermarks, no sign-up, completely free",
+      "15–60 s 9:16 Shorts or equal parts",
+      "Blurred 9:16 background, crop or letterbox",
+      "Tamil, Telugu, Hindi & English audio track picker",
+      "One ZIP download — or send to UTubeFlow",
     ],
     gradient: "from-orange-500 to-rose-600",
     accent: "#f97316",
     status: "New",
     category: "Media",
-    image: "/images/videocut.png",
+    logo: "/logos/videocut.svg",
+    ...shots("videocut", ["Split long videos into parts and 9:16 Shorts","The VideoCut Studio editor with a clip loaded: trim, split, frame and add text","See how VideoCut works in a two-minute guide"]),
     cardImage: "/images/products/videocut.jpg",
     cta: "Open Video Cut",
   },
@@ -194,16 +214,17 @@ export const products: Product[] = [
     description:
       "Free AI video maker: type a script and get a talking cartoon video with AI voices, lip sync, subtitles and music — or a text-only video with big captions. Tamil, Hindi, Telugu & English. No watermark.",
     features: [
-      "Script to video with AI voices",
-      "66 cartoon characters with lip sync",
-      "Text-only caption videos",
+      "AI writes the script — you check it first",
+      "66 cartoon characters, AI voices & lip sync",
+      "Edit any line on the timeline; own video & music",
       "Free MP4 export up to 4K, no watermark",
     ],
     gradient: "from-orange-500 to-amber-500",
     accent: "#ff5b24",
     status: "New",
     category: "Creator",
-    image: "/images/videomaker.png",
+    logo: "/logos/videomaker.svg",
+    ...shots("videomaker", ["Turn a script into a talking cartoon video","The editor: script on the left, live preview and a voice/scene/music timeline","Write the dialogue, pick characters, export an MP4"]),
     cardImage: "/images/products/videomaker.jpg",
     cta: "Make a Video",
   },
@@ -220,13 +241,14 @@ export const products: Product[] = [
       "Bulk upload YouTube videos & Shorts",
       "Schedule posts in advance",
       "Autopilot posting with your PC off",
-      "100% free, no paid plans",
+      "VideoCut & Video Maker built in",
     ],
     gradient: "from-red-500 to-rose-600",
     accent: "#ef4444",
     status: "New",
     category: "Creator",
-    image: "/images/utubeflow.png",
+    logo: "/logos/utubeflow.svg",
+    ...shots("utubeflow", ["Upload once, post every day — free YouTube automation","Make your videos inside UTubeFlow with VideoCut and Video Maker","Bulk uploads, Autopilot and smart daily time slots"]),
     cardImage: "/images/products/utubeflow.jpg",
   },
   {
@@ -241,14 +263,15 @@ export const products: Product[] = [
     features: [
       "Play J2ME .jar games in your browser",
       "163 free open-license Java games",
-      "Tiny Android app (~177 KB)",
+      "Android app (~245 KB) & Windows app",
       "Phone keypad, touch & keyboard controls",
     ],
     gradient: "from-emerald-500 to-teal-600",
     accent: "#10b981",
     status: "New",
     category: "Games",
-    image: "/images/javaplay.png",
+    logo: "/logos/javaplay.svg",
+    ...shots("javaplay", ["Old Java phone games, back on your PC and phone","163 free open-license Java games, ready to play","Pick a game and play it with the on-screen keypad"]),
     cardImage: "/images/products/javaplay.jpg",
     cta: "Play Java Games",
   },
@@ -348,6 +371,8 @@ export const productDetails: Record<string, ProductDetail> = {
       { q: "Can I use Video Cut as a video shorts cutter?", a: "Yes. Video Cut is built to trim and split long videos into bite-sized clips formatted for YouTube Shorts, Instagram Reels, and vertical feeds." },
       { q: "Does Video Cut upload my videos or add a watermark?", a: "No. Processing runs locally in your browser so files stay private on your device and exports have no watermarks." },
       { q: "Is Video Cut free to use?", a: "Yes, Video Cut is 100% free with no account required." },
+      { q: "Can I keep only the Tamil (or Hindi, Telugu, English) audio?", a: "Yes. If an MP4 or MKV file has several audio tracks, Video Cut lists them all, lets you hear each one live, and your exported parts keep only the track you pick." },
+      { q: "Can I schedule the clips on YouTube?", a: "Yes. Send to UTubeFlow puts every clip, already titled Part 1, Part 2…, into your UTubeFlow upload list, where it can be scheduled one per day without downloading anything." },
     ],
   },
   videomaker: {
@@ -355,7 +380,7 @@ export const productDetails: Record<string, ProductDetail> = {
       "Video Maker is CodeLove's free AI video maker. Type a dialogue and 66 ready-made cartoon characters act it out with AI voices from Google Gemini, lip sync worked out from the real sound, word-by-word subtitles, background music and sound effects. Prefer no characters? Text-only mode turns the same script into big captions on a plain screen. It works in Tamil, Tanglish, Telugu, Hindi, Hinglish and English, runs entirely in your browser with your own free Gemini key, and exports an MP4 for YouTube Shorts, Instagram Reels and YouTube — up to 4K, with no watermark.",
     highlights: ["Free AI video maker", "AI voices & lip sync", "Text-only mode", "No watermark"],
     steps: [
-      { icon: "fileText", title: "Write the script", text: "Type one line per turn, like Meena: Hello! — or let the AI write it from a topic in your language." },
+      { icon: "fileText", title: "Write the script", text: "Type one line per turn, like Meena: Hello! — or let the AI (Gemini, ChatGPT or any AI) write it in your language, then check every line before it is used." },
       { icon: "user", title: "Pick the look", text: "Choose cartoon characters and voices, or go text-only with big captions on a plain colour screen." },
       { icon: "sparkles", title: "Add AI voices", text: "Press play: Gemini speaks every line with your free key, mouths sync to the sound, music and effects play underneath." },
       { icon: "download", title: "Export the MP4", text: "Download for Shorts, Reels or YouTube up to 4K — or send it straight to UTubeFlow to schedule." },
@@ -363,7 +388,9 @@ export const productDetails: Record<string, ProductDetail> = {
     faqs: [
       { q: "Is Video Maker really free?", a: "Yes. The site is free with no sign-up and no watermark. The AI voices use Google Gemini through your own free API key, which allows several videos a day." },
       { q: "Can I make a video without cartoon characters?", a: "Yes. Text-only mode shows big word-by-word captions on a plain screen with the same AI voices, music and sound effects." },
-      { q: "Which languages does it support?", a: "Tamil, Tanglish, Telugu, Hindi, Hinglish and English, with matching subtitle fonts for each." },
+      { q: "Which languages does it support?", a: "Tamil, Tanglish, Telugu, Hindi, Hinglish and English, with matching subtitle fonts for each. The AI script writer checks that every line is in the voice language you picked." },
+      { q: "Can I change a line after the video is made?", a: "Yes. Click any line on the timeline to change the words, speaker, mood, subtitle or the pause before it, or move and delete lines. Only the changed lines are recorded again." },
+      { q: "Can I use my own video or music?", a: "Yes. Use your own video as the background (with its sound and a start point) and your own music track. Both stay in your browser for next time." },
     ],
   },
   videotoimages: {
@@ -412,22 +439,23 @@ export const productDetails: Record<string, ProductDetail> = {
       { q: "Is UTubeFlow really free?", a: "Yes. Bulk uploading, scheduling and Autopilot posting are free to use." },
       { q: "Does my PC need to stay on?", a: "No. Once Autopilot is set up, your scheduled videos and Shorts are posted even when your PC is off." },
       { q: "Does it work with YouTube Shorts?", a: "Yes. You can bulk upload and schedule both regular YouTube videos and Shorts." },
+      { q: "Can I make videos inside UTubeFlow?", a: "Yes. VideoCut (split long videos into Shorts) and Video Maker (script to cartoon video) open right inside UTubeFlow, and finished clips land in Ready to Post." },
     ],
   },
   javaplay: {
     overview:
-      "JavaPlay brings back the Java (J2ME) games from old keypad phones. Open a .jar game right in your browser, or install the small Android app (about 177 KB). The site has a free catalog of 163 open-license Java games ready to play, and you can also load .jar files you already have. An on-screen phone keypad, touch and your computer keyboard all work as controls, and you can record your gameplay as a video. It is free and needs no sign-up.",
+      "JavaPlay brings back the Java (J2ME) games from old keypad phones. Open a .jar game right in your browser, or install the small Android app (about 245 KB) or the Windows app. The site has a free catalog of 163 open-license Java games ready to play, and you can also load .jar files you already have. An on-screen phone keypad, touch and your computer keyboard all work as controls, and you can record your gameplay as a video. It is free and needs no sign-up.",
     highlights: ["Completely free", "No sign-up", "Browser & Android", "163 free games"],
     steps: [
       { icon: "search", title: "Pick a game", text: "Browse the 163 free open-license Java games, or open a .jar file you already have." },
       { icon: "play", title: "Play in your browser", text: "The game starts right in the browser tab — nothing to install." },
       { icon: "smartphone", title: "Use phone keys", text: "Play with the on-screen phone keypad, touch, or your computer keyboard." },
-      { icon: "download", title: "Get the Android app", text: "Install the tiny JavaPlay app (about 177 KB) to play Java games on your Android phone." },
+      { icon: "download", title: "Get the Android app", text: "Install the tiny JavaPlay app (about 245 KB) to play Java games on your Android phone." },
     ],
     faqs: [
       { q: "Is JavaPlay free?", a: "Yes. The player, the Android app and the 163 games in the catalog are free, with no sign-up." },
       { q: "Can I play my own .jar games?", a: "Yes. Open any J2ME .jar file in the browser player or the Android app. Only play games you have the right to use." },
-      { q: "Where do I get the Android app?", a: "Download it from javaplay.codelove.in/download/JavaPlay.apk. It is about 177 KB." },
+      { q: "Where do I get the Android app?", a: "Download it from javaplay.codelove.in/download/JavaPlay.apk. It is about 245 KB. A Windows app (.exe) is available on the same site." },
       { q: "Can I record my gameplay?", a: "Yes. JavaPlay can record your gameplay as a video you can save and share." },
     ],
   },
@@ -477,6 +505,8 @@ export const categories: Category[] = [
   { icon: "download", title: "Downloads", slug: "downloads", blurb: "Saving Instagram & Pinterest media responsibly.", gradient: "from-blue-500 to-indigo-600" },
   { icon: "link", title: "Creator", slug: "creator", blurb: "Link-in-bio pages & growing your audience.", gradient: "from-violet-500 to-fuchsia-600" },
   { icon: "box", title: "3D Models", slug: "3d-models", blurb: "GLB files, licences & using models in projects.", gradient: "from-indigo-500 to-violet-600" },
+  { icon: "youtube", title: "YouTube & Shorts", slug: "youtube", blurb: "Cutting Shorts, AI cartoon videos & scheduling uploads.", gradient: "from-red-500 to-orange-600" },
+  { icon: "play", title: "Games", slug: "games", blurb: "Free 3D browser games & classic Java phone games.", gradient: "from-amber-500 to-emerald-600" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -505,6 +535,7 @@ export type Article = {
 };
 
 export const articles: Article[] = [
+  ...newArticles,
   {
     slug: "what-is-a-glb-file",
     title: "What Is a GLB File? 3D Models for the Web Explained",
@@ -518,7 +549,7 @@ export const articles: Article[] = [
     gradient: "from-indigo-500 to-violet-600",
     icon: "box",
     featured: true,
-    image: "/images/models.png",
+    image: "/images/products/models.jpg",
     intro:
       "If you have downloaded a 3D model recently, there is a good chance it ended in .glb. The format has quietly become the standard way to move 3D models between tools and onto web pages. Here is what it is and why it took over.",
     takeaways: [
@@ -616,7 +647,7 @@ export const articles: Article[] = [
     updated: "Oct 10, 2026",
     gradient: "from-fuchsia-500 to-rose-600",
     icon: "image",
-    image: "/images/videotoimages.png",
+    image: "/images/products/videotoimages.jpg",
     intro:
       "A video is just a long stack of still images shown quickly. Pulling those images back out is useful more often than you might expect — for thumbnails, storyboards, reference stills or simply grabbing the one perfect moment.",
     takeaways: [
@@ -667,7 +698,7 @@ export const articles: Article[] = [
     updated: "Jul 2, 2026",
     gradient: "from-pink-500 to-rose-600",
     icon: "download",
-    image: "/images/igdownloader.png",
+    image: "/images/products/downloader.jpg",
     intro:
       "Saving your own reels, backing up a client's carousel, or archiving content you created — there are plenty of legitimate reasons to download Instagram media. This guide covers how it works and how to do it responsibly.",
     takeaways: [
@@ -712,7 +743,7 @@ export const articles: Article[] = [
     updated: "Oct 10, 2026",
     gradient: "from-violet-500 to-fuchsia-600",
     icon: "layers",
-    image: "/images/models.png",
+    image: "/images/products/models.jpg",
     intro:
       "Free 3D model libraries can save weeks of work on a game, a prototype or a web experience. Getting real value from them comes down to three things: picking models that suit real-time use, understanding the licence, and keeping your credits in order.",
     takeaways: [
@@ -907,7 +938,7 @@ export const articles: Article[] = [
     updated: "Oct 10, 2026",
     gradient: "from-rose-500 to-pink-600",
     icon: "scissors",
-    image: "/images/videotogif.png",
+    image: "/images/products/videotogif.jpg",
     intro:
       "A five-second GIF can easily weigh more than a minute of video. That is not a mistake in your export — it is how the format works. Once you know what drives the size, shrinking a GIF becomes a matter of choosing what to give up.",
     takeaways: [
@@ -958,7 +989,7 @@ export const articles: Article[] = [
     updated: "Oct 10, 2026",
     gradient: "from-red-500 to-rose-600",
     icon: "download",
-    image: "/images/downloader.png",
+    image: "/images/products/downloader.jpg",
     intro:
       "Pinterest is built for collecting ideas, but its boards only work while you are online and signed in. Saving a pin to your device is useful for mood boards, client references and offline planning — as long as you respect who made it.",
     takeaways: [
@@ -1054,7 +1085,7 @@ export const articles: Article[] = [
     updated: "Oct 10, 2026",
     gradient: "from-violet-500 to-fuchsia-600",
     icon: "link",
-    image: "/images/linkinbio.png",
+    image: "/images/products/linkinbio.jpg",
     intro:
       "A link in bio page can hold as many links as you like, which is exactly the trap. The pages that work are the ones that make a visitor's next step obvious within a couple of seconds.",
     takeaways: [
@@ -1532,6 +1563,8 @@ export const footerColumns = [
       { label: "Download Guides", href: "/learn/downloads" },
       { label: "Creator Guides", href: "/learn/creator" },
       { label: "3D Model Guides", href: "/learn/3d-models" },
+      { label: "YouTube & Shorts Guides", href: "/learn/youtube" },
+      { label: "Game Guides", href: "/learn/games" },
     ],
   },
   {
@@ -1554,6 +1587,7 @@ export const footerColumns = [
 ];
 
 export const blogs: Article[] = [
+  ...newBlogs,
   {
     slug: "introducing-3d-models",
     title: "Introducing 3D Models: A Free GLB Library",
@@ -1566,13 +1600,13 @@ export const blogs: Article[] = [
     gradient: "from-indigo-500 to-violet-600",
     icon: "box",
     featured: true,
-    image: "/images/models.png",
+    image: "/images/products/models.jpg",
     intro: "CodeLove has a new product, and it is a different kind of tool from the ones before it. 3D Models is a library of free 3D assets you can inspect in your browser and download for your own projects.",
     takeaways: ["6,700+ free models", "Live 3D preview", "Open licences shown on every model", "Single-file GLB downloads"],
     content: [
       {
         heading: "What is in the library",
-        image: "/images/models.png",
+        image: "/images/products/models.jpg",
         paragraphs: [
           "The library holds more than 6,700 models: rigged characters and animals, vehicles, buildings, furniture, food, nature and space. They are organised into categories and collections, so you can browse a whole matching kit instead of hunting for pieces one at a time.",
           "Every model has its own page with a live 3D preview, its triangle count, its file size and its licence."
@@ -1606,13 +1640,13 @@ export const blogs: Article[] = [
     gradient: "from-blue-500 to-indigo-600",
     icon: "download",
     featured: false,
-    image: "/images/downloader.png",
+    image: "/images/products/downloader.jpg",
     intro: "The CodeLove Downloader now concentrates on two platforms: Instagram and Pinterest. Here is what it does today.",
     takeaways: ["Instagram videos and Reels", "Pinterest videos and images", "Single and multi-link modes", "Public content only"],
     content: [
       {
         heading: "What is supported",
-        image: "/images/downloader.png",
+        image: "/images/products/downloader.jpg",
         paragraphs: [
           "There are three downloaders: one for Instagram videos and Reels, one for Pinterest videos and one for Pinterest images. Each works the same way — paste a link, check the preview, and save the file.",
           "You do not need an account, and the Downloader never asks for your Instagram or Pinterest password."
@@ -1645,13 +1679,13 @@ export const blogs: Article[] = [
     gradient: "from-fuchsia-500 to-rose-600",
     icon: "film",
     featured: false,
-    image: "/images/videotoimages.png",
+    image: "/images/products/videotoimages.jpg",
     intro: "Video to Frame started as one tool that did one job. It now sits alongside seven others, so the product has a new name to match: Video to Images.",
     takeaways: ["Eight tools in one place", "Video and image editing", "Nothing is uploaded", "Free, with no watermark"],
     content: [
       {
         heading: "What is included",
-        image: "/images/videotoimages.png",
+        image: "/images/products/videotoimages.jpg",
         paragraphs: [
           "For video there are five tools: Video to Frame for extracting stills, Video to MP3 for saving the audio track, and Video Compressor, Video Crop and Video Resize for getting a clip to the right size and shape.",
           "For images there are three: Image Compressor, Image Crop and Image Resize."
@@ -1684,13 +1718,13 @@ export const blogs: Article[] = [
     gradient: "from-rose-500 to-pink-600",
     icon: "play",
     featured: false,
-    image: "/images/videotogif.png",
+    image: "/images/products/videotogif.jpg",
     intro: "Making a GIF is rarely a single step. You convert the clip, notice it is too large, crop out the edges and shrink it again. Video to GIF now covers that whole loop.",
     takeaways: ["Eight GIF and video tools", "Convert in both directions", "Crop, resize and compress", "Runs in your browser"],
     content: [
       {
         heading: "The tools",
-        image: "/images/videotogif.png",
+        image: "/images/products/videotogif.jpg",
         paragraphs: [
           "Alongside the original Video to GIF converter there is now GIF to Video, which turns an animated GIF into a much lighter MP4. GIF Resize, GIF Crop and GIF Compressor handle the clean-up after a conversion.",
           "Three matching tools work on the source clip before you convert it: Video Crop, Video Resize and Video Compressor."
@@ -1785,7 +1819,7 @@ export const blogs: Article[] = [
       },
       {
         heading: "Available today",
-        image: "/images/videotogif.png",
+        image: "/images/products/videotogif.jpg",
         paragraphs: [
           "Both Video to GIF and Video to Frame are available starting today, completely free of charge and without watermarks. Try them out in the Products section and let us know what you think!"
         ]
@@ -1845,13 +1879,13 @@ export const blogs: Article[] = [
     gradient: "from-fuchsia-500 to-rose-600",
     icon: "palette",
     featured: false,
-    image: "/images/linkinbio.png",
+    image: "/images/products/linkinbio.jpg",
     intro: "Creators are busy. They need tools that get out of the way and just work. Here is how we designed our creator suite.",
     takeaways: ["Mobile first design", "Minimal friction", "Bold but clean aesthetics", "Speed as a feature"],
     content: [
       {
         heading: "Speed is the ultimate feature",
-        image: "/images/linkinbio.png",
+        image: "/images/products/linkinbio.jpg",
         paragraphs: [
           "When a creator needs to download a reel for a reaction video, or update their bio link to point to a new sponsor, they want it done in seconds. Every extra click is a point of friction.",
           "We designed our tools to require the absolute minimum number of interactions. Paste a link, hit enter, get your file. No accounts required, no popups, no hidden menus."
@@ -1859,7 +1893,7 @@ export const blogs: Article[] = [
       },
       {
         heading: "Aesthetics that inspire trust",
-        image: "/images/downloader.png",
+        image: "/images/products/downloader.jpg",
         paragraphs: [
           "Many free online tools look like spam sites from 2010. They are covered in flashing banner ads and fake download buttons. We took the opposite approach.",
           "We use a dark, premium aesthetic with smooth gradients and high-quality typography. By making our free tools look like expensive enterprise software, we build immediate trust with our users."
@@ -1867,7 +1901,7 @@ export const blogs: Article[] = [
       },
       {
         heading: "Mobile-first by necessity",
-        image: "/images/linkinbio.png",
+        image: "/images/products/linkinbio.jpg",
         paragraphs: [
           "Over 80% of the traffic to our Link in Bio and Downloader tools comes from mobile devices. If a UI element is difficult to tap on an iPhone, the design has failed.",
           "We rigorously test every interface on actual mobile hardware to ensure touch targets are large, animations are smooth, and the layout feels native."
