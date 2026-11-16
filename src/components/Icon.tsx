@@ -162,6 +162,14 @@ const paths: Record<string, React.ReactNode> = {
       <path d="M7 17 17 7M8 7h9v9" />
     </>
   ),
+  sliders: (
+    <>
+      <path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1" />
+      <circle cx="15" cy="6" r="2" />
+      <circle cx="9" cy="12" r="2" />
+      <circle cx="17" cy="18" r="2" />
+    </>
+  ),
   check: <path d="m5 12 4.5 4.5L19 7" />,
   chevronDown: <path d="m6 9 6 6 6-6" />,
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
