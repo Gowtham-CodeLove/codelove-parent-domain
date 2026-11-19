@@ -9,9 +9,9 @@ import { values, products } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Us — The Maker Behind These Free Tools",
+  title: "About Gowtham — The Maker of CodeLove",
   description:
-    "CodeLove is built by Gowthamraj — a solo developer creating fast, free web tools for creators and developers. Learn what I'm building and why.",
+    "Gowtham (Gowthamraj) builds CodeLove alone: fast, free web tools for creators and code lovers. Learn what I'm building and why.",
   path: "/about",
 });
 

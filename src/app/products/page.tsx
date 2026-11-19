@@ -9,9 +9,9 @@ import { products } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "All Products & Tools",
+  title: "CodeLove Tools — Free Online & Video Tools",
   description:
-    "Explore every CodeLove product — a media downloader, a link-in-bio builder, a free 3D model library and browser-based video and image tools.",
+    "Every CodeLove tool in one place: free online tools and free video tools — Video Cut, AI Video Maker, Video to GIF, 3D models, games and more.",
   path: "/products",
   keywords: [
     "CodeLove",
@@ -57,7 +57,8 @@ export default function ProductsPage() {
                 One ecosystem, <span className="text-gradient">every tool</span> you need
               </h1>
               <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
-                Each CodeLove product lives on its own dedicated subdomain — purpose-built, fast and free.
+                All the CodeLove tools — free online tools and free video tools — each on its own subdomain,
+                purpose-built, fast and free.
                 Click any product to learn how it works, then jump straight into the tool.
               </p>
             </Reveal>

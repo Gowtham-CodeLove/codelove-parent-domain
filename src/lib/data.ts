@@ -1570,7 +1570,7 @@ export const footerColumns = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "/about" },
+      { label: "About Gowtham", href: "/about" },
       { label: "Contact", href: "/contact" },
       { label: "Editorial Policy", href: "/legal/editorial-policy" },
     ],

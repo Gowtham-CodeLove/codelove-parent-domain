@@ -28,7 +28,7 @@ const geistMono = Geist_Mono({
 
 const SITE = "https://codelove.in";
 const DESCRIPTION =
-  "CodeLove offers free browser tools, video shorts cutter, 3D GLB models, online 3D & Java games, link in bio pages, and creator automation — no sign-up.";
+  "CodeLove tools: free online tools for code lovers and creators. Free video tools, AI video maker, 3D GLB models, browser games, link in bio. No sign-up.";
 
 const NETWORK_URLS = [
   "https://gowtham.codelove.in",
@@ -49,7 +49,7 @@ const OG_IMAGE = { url: "/og.png", width: 1200, height: 630, alt: "CodeLove — 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "CodeLove — Free Online Tools, 3D Models & Games",
+    default: "CodeLove — Free Online Tools for Code Lovers",
     template: "%s · CodeLove",
   },
   description: DESCRIPTION,
@@ -59,6 +59,10 @@ export const metadata: Metadata = {
     "code love",
     "code of love",
     "code with love",
+    "code lovers",
+    "codelove tools",
+    "free video tools",
+    "gowtham codelove",
     ...products.map((p) => p.name),
     ...products.map((p) => p.name.toLowerCase()),
     "free online tools",

@@ -62,6 +62,9 @@ export default function Hero() {
 
         <Reveal delay={80}>
           <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7.5xl">
+            <span className="mb-4 block font-[family-name:var(--font-sans)] text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)] sm:text-base">
+              CodeLove · Free online tools for code lovers
+            </span>
             Everything You Need.
             <br />
             <span className="text-gradient">One Platform.</span>
@@ -83,8 +86,8 @@ export default function Hero() {
 
         <Reveal delay={200}>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg">
-            Explore free online tools — a media downloader, video and image tools, a link-in-bio builder and a 3D
-            model library — plus educational content for creators, developers, students and businesses.
+            CodeLove tools are free online tools for code lovers and creators — free video tools, an AI video
+            maker, a link-in-bio builder, a 3D model library and browser games — plus step-by-step guides.
           </p>
         </Reveal>
 

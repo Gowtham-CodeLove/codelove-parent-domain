@@ -16,8 +16,8 @@ export default function Footer() {
               <Logo variant="footer" className="h-9" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-[var(--text-muted)]">
-              Free online tools for creators and developers — a media downloader, video and image tools, a
-              link-in-bio builder and a 3D model library.
+              CodeLove tools are free online tools for code lovers, creators and developers — free video tools, a
+              link-in-bio builder, a 3D model library and browser games.
             </p>
           </div>
 
